@@ -1,40 +1,37 @@
 {
   "name": "harbor-cli",
   "description": "HarborCLI: A developer-friendly CLI tool for seamlessly migrating bare-metal apps to Docker. Automate containerization, data syncing, parallel deployments, and troubleshooting with interactive guides and email notifications.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "author": "Brian Mwendwa",
   "bin": {
     "harbor-cli": "./bin/run.js"
   },
-  "bugs": "https://github.com/https://github.com/mwendwa99/harbor-cli/https://github.com/mwendwa99/harbor-cli/issues",
+  "bugs": "https://github.com/mwendwa99/harbor-cli/issues",
   "dependencies": {
     "@oclif/core": "^4",
-    "@oclif/plugin-help": "^6",
-    "@oclif/plugin-plugins": "^5",
     "child_process": "^1.0.2",
+    "dedent": "^1.6.0",
     "dockerode": "^4.0.7",
     "inquirer": "^12.7.0",
-    "nodemailer": "^7.0.5",
-    "prettier": "^3.6.2"
+    "nodemailer": "^7.0.5"
   },
   "devDependencies": {
     "@eslint/compat": "^1",
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^4",
-    "@types/chai": "^4",
     "@types/dedent": "^0.7.2",
     "@types/dockerode": "^3.3.42",
-    "@types/mocha": "^10",
+    "@types/inquirer": "^9.0.7",
+    "@types/jest": "^29.5.14",
     "@types/node": "^18",
     "@types/nodemailer": "^6.4.17",
-    "chai": "^4",
-    "dedent": "^1.6.0",
     "eslint": "^9",
-    "eslint-config-oclif": "^6",
     "eslint-config-prettier": "^10",
-    "mocha": "^10",
+    "eslint-plugin-prettier": "^5.2.1",
+    "jest": "^29.7.0",
     "oclif": "^4",
-    "shx": "^0.3.3",
+    "prettier": "^3.6.2",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10",
     "typescript": "^5"
   },
@@ -46,9 +43,13 @@
     "./dist",
     "./oclif.manifest.json"
   ],
-  "homepage": "https://github.com/https://github.com/mwendwa99/harbor-cli/https://github.com/mwendwa99/harbor-cli",
+  "homepage": "https://github.com/mwendwa99/harbor-cli#readme",
   "keywords": [
-    "oclif"
+    "oclif",
+    "docker",
+    "migration",
+    "cli",
+    "containerization"
   ],
   "license": "MIT",
   "main": "dist/index.js",
@@ -57,26 +58,24 @@
     "bin": "harbor-cli",
     "dirname": "harbor-cli",
     "commands": "./dist/commands",
-    "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
-    ],
-    "topicSeparator": " ",
-    "topics": {
-      "hello": {
-        "description": "Say hello to the world and others"
-      }
-    }
+    "plugins": [],
+    "topicSeparator": " "
   },
-  "repository": "https://github.com/mwendwa99/harbor-cli/https://github.com/mwendwa99/harbor-cli",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mwendwa99/harbor-cli.git"
+  },
   "scripts": {
-    "build": "shx rm -rf dist && tsc -b",
-    "lint": "eslint",
-    "postpack": "shx rm -f oclif.manifest.json",
-    "posttest": "npm run lint",
+    "build": "tsc -b",
+    "lint": "eslint . --ext .ts",
+    "postpack": "rm -f oclif.manifest.json",
     "prepack": "oclif manifest && oclif readme",
-    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif readme && git add README.md"
+    "prettier": "prettier --write .",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "types": "dist/index.d.ts"
 }
